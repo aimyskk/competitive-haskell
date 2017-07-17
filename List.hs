@@ -1,6 +1,6 @@
 module List (
-    splitOn
-  , comb
+  splitOn,
+  comb
 ) where
 
 import Control.Monad

@@ -1,11 +1,11 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module SegmentTree (
-    SegTree
-  , val
-  , fromList
-  , update
-  , query
+  SegTree,
+  val,
+  fromList,
+  update,
+  query
 ) where
 
 import Data.Monoid

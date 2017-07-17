@@ -1,11 +1,11 @@
 module Graph (
-    buildG
-  , from
-  , degree
-  , reachable
-  , path
-  , readUndirectedEdge
-  , readDirectedEdge
+  buildG,
+  from,
+  degree,
+  reachable,
+  path,
+  readUndirectedEdge,
+  readDirectedEdge
 ) where
 
 import qualified Data.ByteString.Char8 as B

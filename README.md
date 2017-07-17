@@ -1,2 +1,2 @@
 # lib-competitive
-library for competitive programming in Haskell
+Library for competitive programming in Haskell

@@ -1,6 +1,7 @@
 module Math (
-    primes
-  , factorization
+  primes,
+  factorization,
+  isqrt
 ) where
 
 import Data.List
