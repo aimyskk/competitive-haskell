@@ -14,4 +14,4 @@ comb n xs = go n xs [] []
   where
     go 0 _ ys zs = reverse ys : zs
     go _ [] _  zs = zs
-    go m (w:ws) ys zs = go (m-1) ws (w:ys) (go m ws ys zs)
+    go m (w:ws) ys zs = go (m - 1) ws (w : ys) (go m ws ys zs)

@@ -13,7 +13,7 @@ import Data.Monoid
 -- modify according to your purpose
 instance Monoid Int where
   mempty = 0
-  mappend v w = v + w
+  mappend = (+)
 
 data SegTree m =
   Leaf !m |
@@ -36,8 +36,8 @@ fromList n xs = Node (val left <> val right) left right
     left = fromList m xs1
     right = fromList (n - m) xs2
 
-update :: Monoid m => Size -> SegTree m -> Index -> m -> SegTree m
-update 1 (Leaf v) 1 x = Leaf (v <> x)
+update :: Monoid m => Size -> SegTree m -> Index -> (m -> m) -> SegTree m
+update 1 (Leaf v) 1 f = Leaf (f v)
 update _ (Leaf _) _ _ = undefined
 update n (Node _ l r) i x
   | i <= m = Node (val left <> val r) left r

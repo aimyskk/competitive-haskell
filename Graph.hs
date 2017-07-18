@@ -19,13 +19,13 @@ type Edge = (Vertex, Vertex)
 type Graph = Array Vertex Vertexes
 
 buildG :: Int -> [Edge] -> Graph
-buildG n = accumArray (flip S.insert) S.empty (1,n)
+buildG n = accumArray (flip S.insert) S.empty (1, n)
 
 from :: Graph -> Vertex -> Vertexes
-from g = (g!)
+from g = (g !)
 
 degree :: Graph -> Vertex -> Int
-degree g = S.size . (g!)
+degree g = S.size . (g !)
 
 reachable :: Graph -> Vertex -> Vertexes
 reachable g v = go (S.singleton v) (S.singleton v)
