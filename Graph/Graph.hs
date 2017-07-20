@@ -1,4 +1,4 @@
-module Graph (
+module Graph.Graph (
   buildG,
   from,
   degree,
@@ -41,11 +41,19 @@ path g v w = S.member w (reachable g v)
 transMap :: Graph -> Vertexes -> Vertexes
 transMap g = S.unions . map (from g) . S.elems
 
-readUndirectedEdge :: B.ByteString -> [Edge]
-readUndirectedEdge = concatMap ((\[v,w] -> [(v,w),(w,v)]) . map readVertex . B.words) . B.lines
-
 readDirectedEdge :: B.ByteString -> [Edge]
-readDirectedEdge = map ((\[v,w] -> (v,w)) . map readVertex . B.words) . B.lines
+readDirectedEdge = map (constructOneWay . map readInt . B.words) . B.lines
 
-readVertex :: B.ByteString -> Vertex
-readVertex = fst . fromJust . B.readInt
+readUndirectedEdge :: B.ByteString -> [Edge]
+readUndirectedEdge = concatMap (constructTwoWay . map readInt . B.words) . B.lines
+
+constructOneWay :: [Int] -> Edge
+constructOneWay [s,t] = (s, t)
+constructOneWay _ = undefined
+
+constructTwoWay :: [Int] -> [Edge]
+constructTwoWay [s,t] = [(s, t), (t, s)]
+constructTwoWay _ = undefined
+
+readInt :: B.ByteString -> Int
+readInt = fst . fromJust . B.readInt
