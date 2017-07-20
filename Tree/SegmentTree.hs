@@ -55,4 +55,5 @@ query n (Node v l r) i j
   | j <= m = query m l i j
   | i > m = query (n - m) r (i - m) (j - m)
   | otherwise = query m l i m <> query (n - m) r 1 (j - m)
-  where m = div n 2
+  where
+    m = div n 2

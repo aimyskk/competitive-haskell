@@ -8,7 +8,8 @@ import Data.List
 
 primes :: [Int]
 primes = 2 : 3 : [x | i <- [1..], j <- [-1,1], let x = 6*i+j, isPrime x]
-  where isPrime n = null [i | i <- takeWhile (\p -> p*p <= n) primes, mod n i == 0]
+  where
+    isPrime n = null [i | i <- takeWhile (\p -> p*p <= n) primes, mod n i == 0]
 
 factorization :: Int -> [Int]
 factorization n = unfoldr go (n, primes)
