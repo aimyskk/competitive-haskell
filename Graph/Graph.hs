@@ -1,45 +1,38 @@
 module Graph.Graph (
+  Vertex,
+  Vertexes,
+  Edge,
+  Graph,
+
   buildG,
+  size,
   from,
   degree,
-  reachable,
-  path,
   readUndirectedEdge,
   readDirectedEdge
 ) where
 
 import qualified Data.ByteString.Char8 as B
 import qualified Data.IntSet as S
-import Data.Array.IArray
+import qualified Data.Array.IArray as A
 import Data.Maybe
 
 type Vertex = Int
 type Vertexes = S.IntSet
 type Edge = (Vertex, Vertex)
-type Graph = Array Vertex Vertexes
+type Graph = A.Array Vertex Vertexes
 
 buildG :: Int -> [Edge] -> Graph
-buildG n = accumArray (flip S.insert) S.empty (1, n)
+buildG n = A.accumArray (flip S.insert) S.empty (1, n)
+
+size :: Graph -> Int
+size = snd . A.bounds
 
 from :: Graph -> Vertex -> Vertexes
-from g = (g !)
+from g = (g A.!)
 
 degree :: Graph -> Vertex -> Int
-degree g = S.size . (g !)
-
-reachable :: Graph -> Vertex -> Vertexes
-reachable g v = go (S.singleton v) (S.singleton v)
-  where
-    go acc border
-      | S.null border = acc
-      | otherwise = go (S.union acc next) next
-        where next = S.difference (transMap g border) acc
-
-path :: Graph -> Vertex -> Vertex -> Bool
-path g v w = S.member w (reachable g v)
-
-transMap :: Graph -> Vertexes -> Vertexes
-transMap g = S.unions . map (from g) . S.elems
+degree g = S.size . (g A.!)
 
 readDirectedEdge :: B.ByteString -> [Edge]
 readDirectedEdge = map (constructOneWay . map readInt . B.words) . B.lines
