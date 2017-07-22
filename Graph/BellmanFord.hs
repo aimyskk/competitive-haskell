@@ -1,8 +1,8 @@
-module Graph.Algorithm.BellmanFord (
+module Graph.BellmanFord (
   bellmanFord,
 ) where
 
-import Graph.WeightedGraph
+import WeightedGraph
 
 import qualified Data.Set as S
 import qualified Data.IntMap as M

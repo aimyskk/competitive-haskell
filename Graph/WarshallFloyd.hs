@@ -1,4 +1,4 @@
-module Graph.Algorithm.WarshallFloyd (
+module Graph.WarshallFloyd (
   warshallFloyd,
   readDirectedEdge,
   readUndirectedEdge

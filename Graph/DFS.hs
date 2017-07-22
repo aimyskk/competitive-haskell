@@ -1,8 +1,8 @@
-module Graph.Algorithm.DFS (
+module Graph.DFS (
   dfs
 ) where
 
-import Graph.Graph
+import Graph
 
 import qualified Data.IntSet as S
 

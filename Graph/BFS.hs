@@ -1,9 +1,9 @@
-module Graph.Algorithm.BFS (
+module Graph.BFS (
   bfs,
   reachable
 ) where
 
-import Graph.Graph
+import Graph
 
 import qualified Data.IntSet as S
 
