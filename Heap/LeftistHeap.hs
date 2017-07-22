@@ -32,7 +32,7 @@ instance Heap LeftistHeap where
   isEmpty E = True
   isEmpty _ = False
 
-  singleton x = T 1 x E E
+  singleton x = insert x empty
   fromList = foldr insert empty
 
   insert x = merge (T 1 x E E)
