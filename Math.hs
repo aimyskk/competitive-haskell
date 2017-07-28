@@ -1,4 +1,7 @@
 module Math (
+  modulus,
+  (+%),
+  (*%),
   primes,
   factorization,
   isqrt,
@@ -14,11 +17,17 @@ import qualified Data.Array.IArray as A
 
 type FactTable = A.Array Int (Int,Int)
 
-modulo :: Int
-modulo = 1000000007
+modulus :: Int
+modulus = 1000000007
+
+(+%) :: Int -> Int -> Int
+(+%) x y = mod (x + y) modulus
 
 (*%) :: Int -> Int -> Int
-(*%) x y = mod (x*y) modulo
+(*%) x y = fromIntegral $ mod (xz * yz) (fromIntegral modulus)
+  where
+    xz = fromIntegral x :: Integer
+    yz = fromIntegral y :: Integer
 
 primes :: Integral a => [a]
 primes = 2 : 3 : [x | i <- [1..], j <- [-1,1], let x = 6*i+j, isPrime x]
@@ -47,7 +56,7 @@ pow :: Int -> Int -> Int
 pow x n
   | n == 0 = 1
   | odd n = x *% pow x (n-1)
-  | otherwise = mod (pow x (div n 2) ^ (2 :: Int)) modulo
+  | otherwise = mod (pow x (div n 2) ^ (2 :: Int)) modulus
 
 combMod :: FactTable -> Int -> Int -> Int
 combMod t n r
@@ -58,4 +67,4 @@ factTable :: Int -> FactTable
 factTable n = A.listArray (0, n) (zip facts factInvs)
   where
     facts = scanl (*%) 1 [1..n]
-    factInvs = map (\x -> mod (pow x (modulo - 2)) modulo) facts
+    factInvs = map (\x -> mod (pow x (modulus - 2)) modulus) facts
