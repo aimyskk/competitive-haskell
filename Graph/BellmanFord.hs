@@ -12,15 +12,15 @@ type Memo = M.IntMap (Weight, Path)
 
 -- accumrated weight and lexical order shortest path
 bellmanFord :: Graph -> Vertex -> Memo
-bellmanFord g s = bellmanFordCore g n m0
+bellmanFord g s = bellmanFordDP g n m0
  where
   n = size g
   m0 = M.singleton s (0, [])
 
-bellmanFordCore :: Graph -> Int -> Memo -> Memo
-bellmanFordCore g n m
+bellmanFordDP :: Graph -> Int -> Memo -> Memo
+bellmanFordDP g n m
   | n == 1 = m
-  | otherwise = bellmanFordCore g (n - 1) (M.foldrWithKey (move g) m m)
+  | otherwise = bellmanFordDP g (n - 1) (M.foldrWithKey (move g) m m)
 
 move :: Graph -> Vertex -> (Weight, Path) -> Memo -> Memo
 move g s (aw, path) m = S.foldr update m (from g s)
