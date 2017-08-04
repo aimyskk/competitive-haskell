@@ -39,7 +39,7 @@ merge uf p1 p2
     rp2 = rep uf p2
 
 same :: UnionFind -> Point -> Point -> Bool
-same uf p1 p2 = untilFix (rep uf) p1 == untilFix (rep uf) p2
+same uf p1 p2 = rep uf p1 == rep uf p2
 
 fromList :: [Point] -> UnionFind
 fromList ps = UnionFind tree0 rk0

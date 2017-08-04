@@ -25,9 +25,9 @@ divides [x] = [[[x]]]
 divides (x:xs) = let dxs = divides xs in map ([x]:) dxs ++ map (\(ys:yss) -> (x:ys):yss) dxs
 
 lis :: Ord a => [a] -> [a]
-lis = S.toList . snd . foldl lisDP (S.empty, S.empty)
+lis = S.toList . snd . foldl _lis (S.empty, S.empty)
 
-lisDP :: Ord a => (S.Set a, S.Set a) -> a -> (S.Set a, S.Set a)
-lisDP (acc, acc0) x = case S.lookupGT x acc of
+_lis :: Ord a => (S.Set a, S.Set a) -> a -> (S.Set a, S.Set a)
+_lis (acc, acc0) x = case S.lookupGT x acc of
   Nothing -> let acc1 = S.insert x acc in (acc1, acc1)
   Just g -> (S.insert x (S.delete g acc), acc0)

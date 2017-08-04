@@ -12,15 +12,15 @@ type Memo = M.IntMap (Weight, Path)
 
 -- accumrated weight and lexical order shortest path
 dijkstra :: Graph -> Vertex -> Memo
-dijkstra g s = dijkstraDP g q0 m0
+dijkstra g s = _dijkstra g q0 m0
   where
    q0 = singleton (0, s)
    m0 = M.singleton s (0, [])
 
-dijkstraDP :: Graph -> PriorityQueue -> Memo -> Memo
-dijkstraDP g q m
+_dijkstra :: Graph -> PriorityQueue -> Memo -> Memo
+_dijkstra g q m
   | isEmpty q = m
-  | otherwise = dijkstraDP g q2 m1
+  | otherwise = _dijkstra g q2 m1
   where
     ((w0, s), q1) = deleteFindMin q
     p = s : snd (m M.! s)
