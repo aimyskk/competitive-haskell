@@ -6,7 +6,8 @@ module Graph.WarshallFloyd (
 
 import qualified Data.Map as M
 import qualified Data.ByteString.Char8 as B
-import Data.Maybe
+
+import Scanner (readInt)
 
 type Vertex = Int
 type Weight = Int
@@ -19,7 +20,7 @@ warshallFloyd :: Int -> [Edge] -> Memo
 warshallFloyd n es = foldl shorten m0 kij
   where
     m0 = M.fromList es
-    kij = [(k,i,j) | k<-[0..n-1], i<-[0..n-1], j<-[0..n-1]]
+    kij = [(k, i, j) | k <- [0 .. pred n], i <- [0 .. pred n], j <- [0 .. pred n]]
 
 shorten :: Memo -> (Vertex, Vertex, Vertex) -> Memo
 shorten m (k, i, j) = case connect m k i j of
@@ -45,6 +46,3 @@ constructOneWay _ = undefined
 constructTwoWay :: [Int] -> [Edge]
 constructTwoWay [s,t,w] = [((s,t), (w,[s,t])), ((t,s), (w,[t,s]))]
 constructTwoWay _ = undefined
-
-readInt :: B.ByteString -> Int
-readInt = fst . fromJust . B.readInt

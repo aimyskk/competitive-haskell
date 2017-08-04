@@ -7,7 +7,6 @@ module WeightedGraph (
   buildG,
   size,
   from,
-  degree,
   readUndirectedEdge,
   readDirectedEdge
 ) where
@@ -15,7 +14,8 @@ module WeightedGraph (
 import qualified Data.Set as S
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Array.IArray as A
-import Data.Maybe
+
+import Scanner (readInt)
 
 type Vertex = Int
 type Weight = Int
@@ -31,9 +31,6 @@ size = snd . A.bounds
 from :: Graph -> Vertex -> S.Set (Vertex, Weight)
 from g = (g A.!)
 
-degree :: Graph -> Vertex -> Int
-degree g = S.size . (g A.!)
-
 readDirectedEdge :: B.ByteString -> [Edge]
 readDirectedEdge = map (constructOneWay . map readInt . B.words) . B.lines
 
@@ -47,6 +44,3 @@ constructOneWay _ = undefined
 constructTwoWay :: [Int] -> [Edge]
 constructTwoWay [s,t,w] = [(s, (t,w)), (t, (s,w))]
 constructTwoWay _ = undefined
-
-readInt :: B.ByteString -> Int
-readInt = fst . fromJust . B.readInt

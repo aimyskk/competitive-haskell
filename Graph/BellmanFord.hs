@@ -20,7 +20,7 @@ bellmanFord g s = _bellmanFord g n m0
 _bellmanFord :: Graph -> Int -> Memo -> Memo
 _bellmanFord g n m
   | n == 1 = m
-  | otherwise = _bellmanFord g (n - 1) (M.foldrWithKey (move g) m m)
+  | otherwise = _bellmanFord g (pred n) (M.foldrWithKey (move g) m m)
 
 move :: Graph -> Vertex -> (Weight, Path) -> Memo -> Memo
 move g s (aw, path) m = S.foldr update m (from g s)
