@@ -22,6 +22,7 @@ type Weight = Int
 type Edge = (Vertex, (Vertex, Weight))
 type Graph = A.Array Vertex (S.Set (Vertex, Weight))
 
+-- 1-indexed
 buildG :: Int -> [Edge] -> Graph
 buildG n = A.accumArray (flip S.insert) S.empty (1, n)
 
