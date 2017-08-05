@@ -5,7 +5,6 @@ module WeightedGraph (
   Graph,
 
   buildG,
-  size,
   from,
   readUndirectedEdge,
   readDirectedEdge
@@ -17,20 +16,17 @@ import qualified Data.Array.IArray as A
 
 import Scanner (readInt)
 
+type Bound = (Vertex, Vertex)
 type Vertex = Int
 type Weight = Int
 type Edge = (Vertex, (Vertex, Weight))
 type Graph = A.Array Vertex (S.Set (Vertex, Weight))
 
--- 1-indexed
-buildG :: Int -> [Edge] -> Graph
-buildG n = A.accumArray (flip S.insert) S.empty (1, n)
-
-size :: Graph -> Int
-size = snd . A.bounds
+buildG :: Bound -> [Edge] -> Graph
+buildG = A.accumArray (flip S.insert) S.empty
 
 from :: Graph -> Vertex -> S.Set (Vertex, Weight)
-from g = (g A.!)
+from = (A.!)
 
 readDirectedEdge :: B.ByteString -> [Edge]
 readDirectedEdge = map (constructOneWay . map readInt . B.words) . B.lines

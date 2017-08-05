@@ -5,7 +5,6 @@ module Graph (
   Graph,
 
   buildG,
-  size,
   from,
   readUndirectedEdge,
   readDirectedEdge,
@@ -21,21 +20,18 @@ import Scanner (readInt)
 --type Height = Int
 type Width = Int
 type Index = Int
+type Bound = (Vertex, Vertex)
 
 type Vertex = Int
 type Vertexes = S.IntSet
 type Edge = (Vertex, Vertex)
 type Graph = A.Array Vertex Vertexes
 
--- 1-indexed
-buildG :: Int -> [Edge] -> Graph
-buildG n = A.accumArray (flip S.insert) S.empty (1, n)
-
-size :: Graph -> Int
-size = snd . A.bounds
+buildG :: Bound -> [Edge] -> Graph
+buildG = A.accumArray (flip S.insert) S.empty
 
 from :: Graph -> Vertex -> Vertexes
-from g = (g A.!)
+from = (A.!)
 
 readDirectedEdge :: B.ByteString -> [Edge]
 readDirectedEdge = map (constructOneWay . map readInt . B.words) . B.lines
@@ -52,10 +48,10 @@ constructTwoWay [s,t] = [(s, t), (t, s)]
 constructTwoWay _ = undefined
 
 readBitmap :: Width -> B.ByteString -> [Edge]
-readBitmap w bs = foldl (scout w bs) [] [0 .. B.length bs]
+readBitmap w bs = foldr (scout w bs) [] [0 .. B.length bs]
 
-scout :: Width -> B.ByteString -> [Edge] -> Index -> [Edge]
-scout w bs acc i = zip (repeat i) neighbor ++ acc
+scout :: Width -> B.ByteString -> Index -> [Edge] -> [Edge]
+scout w bs i acc = zip (repeat i) neighbor ++ acc
   where
     neighbor = filter (\x -> inner x && movable x) [i-1, i+1, i-w, i+w]
     inner x = x >= 0 && x < B.length bs
