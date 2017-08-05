@@ -1,3 +1,6 @@
+-- This implementation has room for consideration
+-- In many cases BFS is faster
+
 module Graph.DFS (
   dfs
 ) where
