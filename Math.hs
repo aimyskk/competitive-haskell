@@ -6,7 +6,6 @@ module Math (
   factorization,
   isqrt,
   comb,
-  fact,
   pow,
   combMod,
   factTable
@@ -47,16 +46,16 @@ isqrt :: Integral t => t -> t
 isqrt = floor . sqrt . (fromIntegral :: Integral a => a -> Double)
 
 comb :: Integral a => a -> a -> a
-comb n r = div (fact n) (fact r * fact (n-r))
+comb n r = div (fact n) (fact r * fact (n - r))
 
 fact :: Integral a => a -> a
-fact n = product [1..n]
+fact n = product [1 .. n]
 
 pow :: Int -> Int -> Int
 pow x n
   | n == 0 = 1
   | odd n = x *% pow x (n-1)
-  | otherwise = mod (pow x (div n 2) ^ (2 :: Int)) modulus
+  | otherwise = let y = pow x (div n 2) in y *% y
 
 combMod :: FactTable -> Int -> Int -> Int
 combMod t n r
