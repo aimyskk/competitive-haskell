@@ -2,10 +2,12 @@ module WeightedGraph (
   Vertex,
   Weight,
   Edge,
+  Path,
   Graph,
 
   buildG,
   from,
+  size,
   readUndirectedEdge,
   readDirectedEdge
 ) where
@@ -19,14 +21,18 @@ import Scanner (readInt)
 type Bound = (Vertex, Vertex)
 type Vertex = Int
 type Weight = Int
-type Edge = (Vertex, (Vertex, Weight))
+type Edge = ((Vertex, Vertex), Weight)
+type Path = [Vertex]
 type Graph = A.Array Vertex (S.Set (Vertex, Weight))
 
 buildG :: Bound -> [Edge] -> Graph
-buildG = A.accumArray (flip S.insert) S.empty
+buildG b = A.accumArray (flip S.insert) S.empty b . map (\((s, t), w) -> (s, (t, w)))
 
 from :: Graph -> Vertex -> S.Set (Vertex, Weight)
 from = (A.!)
+
+size :: Graph -> Int
+size g = let (i,j) = A.bounds g in j - i + 1
 
 readDirectedEdge :: B.ByteString -> [Edge]
 readDirectedEdge = map (constructOneWay . map readInt . B.words) . B.lines
@@ -35,9 +41,9 @@ readUndirectedEdge :: B.ByteString -> [Edge]
 readUndirectedEdge = concatMap (constructTwoWay . map readInt . B.words) . B.lines
 
 constructOneWay :: [Int] -> Edge
-constructOneWay [s,t,w] = (s, (t, w))
+constructOneWay [s,t,w] = ((s, t), w)
 constructOneWay _ = undefined
 
 constructTwoWay :: [Int] -> [Edge]
-constructTwoWay [s,t,w] = [(s, (t,w)), (t, (s,w))]
+constructTwoWay [s,t,w] = [((s, t), w), ((t, s), w)]
 constructTwoWay _ = undefined

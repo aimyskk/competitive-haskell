@@ -7,7 +7,6 @@ import WeightedGraph
 import qualified Data.Set as S
 import qualified Data.IntMap as M
 
-type Path = [Vertex]
 type Memo = M.IntMap (Weight, Path)
 
 -- accumrated weight and lexical order shortest path

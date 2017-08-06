@@ -6,6 +6,7 @@ module Graph (
 
   buildG,
   from,
+  size,
   readUndirectedEdge,
   readDirectedEdge,
   readBitmap
@@ -32,6 +33,9 @@ buildG = A.accumArray (flip S.insert) S.empty
 
 from :: Graph -> Vertex -> Vertexes
 from = (A.!)
+
+size :: Graph -> Int
+size g = let (i,j) = A.bounds g in j - i + 1
 
 readDirectedEdge :: B.ByteString -> [Edge]
 readDirectedEdge = map (constructOneWay . map readInt . B.words) . B.lines
