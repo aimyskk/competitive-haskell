@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module SegmentTree (
+module Tree.SegmentTree (
   SegTree,
   val,
   fromList,

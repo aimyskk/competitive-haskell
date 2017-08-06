@@ -1,4 +1,4 @@
-module UnionFind (
+module Tree.UnionFind (
   UnionFind,
 
   initial,
@@ -6,7 +6,7 @@ module UnionFind (
   same
 ) where
 
-import qualified Data.IntMap as M
+import qualified Data.IntMap.Strict as M
 
 import Function (untilFix)
 

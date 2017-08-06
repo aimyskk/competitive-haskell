@@ -5,7 +5,7 @@ module Graph.BellmanFord (
 import WeightedGraph
 
 import qualified Data.Set as S
-import qualified Data.IntMap as M
+import qualified Data.IntMap.Strict as M
 
 type Memo = M.IntMap (Weight, Path)
 
