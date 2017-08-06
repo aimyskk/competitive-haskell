@@ -2,10 +2,6 @@ module UnionFind (
   UnionFind,
 
   initial,
-  (!?),
-  rep,
-  rank,
-  isolate,
   merge,
   same
 ) where
@@ -15,7 +11,7 @@ import qualified Data.IntMap as M
 import Function (untilFix)
 
 data UnionFind = UnionFind {tree :: M.IntMap Point, rk :: M.IntMap Rank}
-type Point = Int
+type Point = Int  -- p > 0
 type Rank = Int
 
 initial :: UnionFind
@@ -52,4 +48,5 @@ merge uf p1 p2
 same :: UnionFind -> Point -> Point -> Bool
 same uf p1 p2
   | p1 == p2 = True
-  | otherwise = not (isolate uf p1) && (rep uf p1 == rep uf p2)
+  | isolate uf p1 = False
+  | otherwise = rep uf p1 == rep uf p2

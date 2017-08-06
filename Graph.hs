@@ -36,12 +36,12 @@ from = (A.!)
 readDirectedEdge :: B.ByteString -> [Edge]
 readDirectedEdge = map (constructOneWay . map readInt . B.words) . B.lines
 
-readUndirectedEdge :: B.ByteString -> [Edge]
-readUndirectedEdge = concatMap (constructTwoWay . map readInt . B.words) . B.lines
-
 constructOneWay :: [Int] -> Edge
 constructOneWay [s,t] = (s, t)
 constructOneWay _ = undefined
+
+readUndirectedEdge :: B.ByteString -> [Edge]
+readUndirectedEdge = concatMap (constructTwoWay . map readInt . B.words) . B.lines
 
 constructTwoWay :: [Int] -> [Edge]
 constructTwoWay [s,t] = [(s, t), (t, s)]
