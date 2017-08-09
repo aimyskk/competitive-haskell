@@ -21,10 +21,10 @@ readInts = map readInt . B.words
 readIntegers :: B.ByteString -> [Integer]
 readIntegers = map readInteger . B.words
 
-readIntPair :: B.ByteString -> [(Int,Int)]
+readIntPair :: B.ByteString -> [(Int, Int)]
 readIntPair = map (pair . map readInt . B.words) . B.lines
 
-readIntegerPair :: B.ByteString -> [(Integer,Integer)]
+readIntegerPair :: B.ByteString -> [(Integer, Integer)]
 readIntegerPair = map (pair . map readInteger . B.words) . B.lines
 
 pair :: [t] -> (t, t)

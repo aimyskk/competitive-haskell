@@ -37,12 +37,12 @@ size g = let (i,j) = A.bounds g in j - i + 1
 readDirectedEdge :: B.ByteString -> [Edge]
 readDirectedEdge = map (constructOneWay . map readInt . B.words) . B.lines
 
-readUndirectedEdge :: B.ByteString -> [Edge]
-readUndirectedEdge = concatMap (constructTwoWay . map readInt . B.words) . B.lines
-
 constructOneWay :: [Int] -> Edge
 constructOneWay [s,t,w] = ((s, t), w)
 constructOneWay _ = undefined
+
+readUndirectedEdge :: B.ByteString -> [Edge]
+readUndirectedEdge = concatMap (constructTwoWay . map readInt . B.words) . B.lines
 
 constructTwoWay :: [Int] -> [Edge]
 constructTwoWay [s,t,w] = [((s, t), w), ((t, s), w)]

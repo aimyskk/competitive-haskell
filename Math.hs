@@ -6,7 +6,7 @@ module Math (
   factorization,
   isqrt,
   comb,
-  pow,
+  powMod,
   combMod,
   factTable
 ) where
@@ -48,11 +48,11 @@ comb n r = div (fact n) (fact r * fact (n - r))
 fact :: Integral a => a -> a
 fact n = product [1 .. n]
 
-pow :: Integer -> Integer -> Integer
-pow x n
+powMod :: Integer -> Integer -> Integer
+powMod x n
   | n == 0 = 1
-  | odd n = x *% pow x (n-1)
-  | otherwise = let y = pow x (div n 2) in y *% y
+  | odd n = x *% powMod x (n-1)
+  | otherwise = let y = powMod x (div n 2) in y *% y
 
 combMod :: FactTable -> Integer -> Integer -> Integer
 combMod t n r
@@ -63,7 +63,7 @@ factTable :: Int -> FactTable
 factTable n = A.listArray (0, n) (zip facts factInvs)
   where
     facts = scanl (*%) 1 [1 .. fromIntegral n]
-    factInvs = map (\x -> mod (pow x (modulus - 2)) modulus) facts
+    factInvs = map (\x -> mod (powMod x (modulus - 2)) modulus) facts
 
 (!) :: FactTable -> Integer -> (Integer, Integer)
 (!) t i = t A.! fromIntegral i

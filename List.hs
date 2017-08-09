@@ -10,7 +10,7 @@ import qualified Data.Set as S
 import Data.List
 
 splitOn :: Int -> [a] -> [[a]]
-splitOn n = unfoldr (\xs -> guard ((not.null) xs) >> return (splitAt n xs))
+splitOn n = unfoldr (\xs -> guard ((not . null) xs) >> return (splitAt n xs))
 
 comb :: Int -> [a] -> [[a]]
 comb n xs = go n xs [] []
@@ -22,7 +22,7 @@ comb n xs = go n xs [] []
 divides :: [a] -> [[[a]]]
 divides [] = []
 divides [x] = [[[x]]]
-divides (x:xs) = let dxs = divides xs in map ([x]:) dxs ++ map (\(ys:yss) -> (x:ys):yss) dxs
+divides (x:xs) = let dxs = divides xs in map ([x] :) dxs ++ map (\(ys:yss) -> (x:ys):yss) dxs
 
 lis :: Ord a => [a] -> [a]
 lis = S.toList . snd . foldl _lis (S.empty, S.empty)

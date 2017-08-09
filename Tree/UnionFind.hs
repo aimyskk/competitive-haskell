@@ -11,7 +11,7 @@ import qualified Data.IntMap.Strict as M
 import Function (untilFix)
 
 data UnionFind = UnionFind {tree :: M.IntMap Point, rk :: M.IntMap Rank}
-type Point = Int  -- p > 0
+type Point = Int  -- greater than 0
 type Rank = Int
 
 initial :: UnionFind
