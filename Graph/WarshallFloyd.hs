@@ -9,6 +9,7 @@ import WeightedGraph
 type Memo = M.Map (Vertex, Vertex) (Weight, Path)
 
 -- accumrated weight and lexical order shortest path
+-- 0-indexed vertex
 warshallFloyd :: Int -> [Edge] -> Memo
 warshallFloyd n es = foldl shorten m0 kij
   where
@@ -24,4 +25,4 @@ connect :: Memo -> Vertex -> Vertex -> Vertex -> Maybe (Weight, Path)
 connect m k i j = do
   (w1, p1) <- M.lookup (i, k) m
   (w2, p2) <- M.lookup (k, j) m
-  return (w1 + w2, init p1 ++ tail p2)
+  return (w1 + w2, p1 ++ tail p2)
