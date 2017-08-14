@@ -1,16 +1,15 @@
 module List (
-  splitOn,
+  chunksOf,
   comb,
   divides,
   lis
 ) where
 
-import Control.Monad
 import qualified Data.Set as S
 import Data.List
 
-splitOn :: Int -> [a] -> [[a]]
-splitOn n = unfoldr (\xs -> guard ((not . null) xs) >> return (splitAt n xs))
+chunksOf :: Int -> [a] -> [[a]]
+chunksOf n = takeWhile (not . null) . unfoldr (return . splitAt n)
 
 comb :: Int -> [a] -> [[a]]
 comb n xs = go n xs [] []
@@ -25,9 +24,8 @@ divides [x] = [[[x]]]
 divides (x:xs) = let dxs = divides xs in map ([x] :) dxs ++ map (\(ys:yss) -> (x:ys):yss) dxs
 
 lis :: Ord a => [a] -> [a]
-lis = S.toList . snd . foldl _lis (S.empty, S.empty)
-
-_lis :: Ord a => (S.Set a, S.Set a) -> a -> (S.Set a, S.Set a)
-_lis (acc, acc0) x = case S.lookupGT x acc of
-  Nothing -> let acc1 = S.insert x acc in (acc1, acc1)
-  Just g -> (S.insert x (S.delete g acc), acc0)
+lis = S.toList . snd . foldl go (S.empty, S.empty)
+  where
+    go (acc, acc0) x = case S.lookupGT x acc of
+      Nothing -> let acc1 = S.insert x acc in (acc1, acc1)
+      Just g -> (S.insert x (S.delete g acc), acc0)
