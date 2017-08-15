@@ -25,5 +25,4 @@ move g s aw m = S.foldr update m (from g s)
   where
     update (t, w) acc
       | M.notMember t acc || acc M.! t < aw + w = M.insert t (aw + w) acc
-      | acc M.! t == aw + w = M.insertWith min t (aw + w) acc
       | otherwise = acc
