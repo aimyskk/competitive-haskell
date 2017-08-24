@@ -1,11 +1,11 @@
 module Math (
-  modulus,
-  (+%),
-  (*%),
   primes,
   factorization,
   isqrt,
   comb,
+  modulus,
+  (+%),
+  (*%),
   powMod,
   combMod,
   factTable
@@ -13,17 +13,6 @@ module Math (
 
 import Data.List
 import qualified Data.Array.IArray as A
-
-type FactTable = A.Array Int (Integer, Integer)
-
-modulus :: Integer
-modulus = 1000000007
-
-(+%) :: Integer -> Integer -> Integer
-(+%) x y = mod (x + y) modulus
-
-(*%) :: Integer -> Integer -> Integer
-(*%) x y = mod (x * y) modulus
 
 primes :: Integral a => [a]
 primes = 2 : 3 : [x | i <- [1 ..], j <- [-1, 1], let x = 6 * i + j, isPrime x]
@@ -44,15 +33,25 @@ isqrt = floor . sqrt . (fromIntegral :: Integral t => t -> Double)
 
 comb :: Integral a => a -> a -> a
 comb n r = div (fact n) (fact r * fact (n - r))
+  where
+    fact x = product [1 .. x]
 
-fact :: Integral a => a -> a
-fact n = product [1 .. n]
+modulus :: Integer
+modulus = 1000000007
+
+(+%) :: Integer -> Integer -> Integer
+(+%) x y = mod (x + y) modulus
+
+(*%) :: Integer -> Integer -> Integer
+(*%) x y = mod (x * y) modulus
 
 powMod :: Integer -> Integer -> Integer
 powMod x n
   | n == 0 = 1
   | odd n = x *% powMod x (n-1)
   | otherwise = let y = powMod x (div n 2) in y *% y
+
+type FactTable = A.Array Int (Integer, Integer)
 
 combMod :: FactTable -> Integer -> Integer -> Integer
 combMod t n r
