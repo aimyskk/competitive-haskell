@@ -16,8 +16,8 @@ bfs g v = go (S.singleton v) (S.singleton v)
         where
           next = S.difference (transMap g border) acc
 
-reachable :: Graph -> Vertex -> Vertex -> Bool
-reachable g v w = S.member w (bfs g v)
-
 transMap :: Graph -> Vertexes -> Vertexes
 transMap g = S.unions . map (from g) . S.elems
+
+reachable :: Graph -> Vertex -> Vertex -> Bool
+reachable g v w = S.member w (bfs g v)
