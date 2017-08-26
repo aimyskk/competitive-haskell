@@ -1,7 +1,6 @@
 module Math.Prime (
   primes,
-  factorization,
-  isqrt
+  factorization
 ) where
 
 import Data.List
@@ -17,8 +16,5 @@ factorization n = unfoldr go (n, primes)
     go (_, []) = Nothing
     go (m, pps@(p:ps))
       | m == 1 = Nothing
-      | p > isqrt n = Just (m, (1, pps))
+      | p > (floor . (sqrt :: Double -> Double) . fromIntegral) n = Just (m, (1, pps))
       | otherwise = let (q, r) = divMod m p in if r == 0 then Just (p, (q, pps)) else go (m, ps)
-
-isqrt :: Integral a => a -> a
-isqrt = floor . sqrt . (fromIntegral :: Integral t => t -> Double)
