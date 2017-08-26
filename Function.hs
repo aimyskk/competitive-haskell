@@ -5,6 +5,9 @@ import Data.List
 untilFix :: Eq t => (t -> t) -> t -> t
 untilFix f x = let x1 = f x in if x1 == x then x else untilFix f x1
 
+apply :: Int -> (a -> a) -> a -> a
+apply n f x = foldr ($) x (replicate n f)
+
 comb :: Integral a => a -> a -> a
 comb n r = div (fact n) (fact r * fact (n - r))
   where
