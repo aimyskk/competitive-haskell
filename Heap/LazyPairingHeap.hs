@@ -13,7 +13,7 @@ module Heap.LazyPairingHeap (
   deleteFindMin
 ) where
 
-import Heap
+import Class
 
 data PairingHeap a = E | T a (PairingHeap a) (PairingHeap a)
 

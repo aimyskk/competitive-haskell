@@ -13,7 +13,7 @@ module Heap.SkewBinomialHeap (
   deleteFindMin
 ) where
 
-import Heap
+import Class
 
 data Tree a = Node Int a [a] [Tree a]
 

@@ -13,7 +13,7 @@ module Heap.LeftistHeap (
   deleteFindMin
 ) where
 
-import Heap
+import Class
 
 data LeftistHeap a = E | T Int a (LeftistHeap a) (LeftistHeap a)
 

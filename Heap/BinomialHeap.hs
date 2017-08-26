@@ -13,7 +13,7 @@ module Heap.BinomialHeap (
   deleteFindMin
 ) where
 
-import Heap
+import Class
 
 data Tree a = Node Int a [Tree a]
 newtype BinomialHeap a = BH [Tree a]

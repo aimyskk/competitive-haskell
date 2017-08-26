@@ -13,7 +13,7 @@ module Heap.BootstrapHeap (
   deleteFindMin
 ) where
 
-import Heap
+import Class
 
 data BootstrapHeap h a = E | H a (h (BootstrapHeap h a))
 
