@@ -22,4 +22,4 @@ nsum x arr = go 1 1 (arr ! 1)
       | acc == x = 1 + go i (j + 1) (acc + arr ! (j + 1))
       | acc < x = go i (j + 1) (acc + arr ! (j + 1))
       | acc > x = go (i + 1) j (acc - arr ! i)
-      | otherwise = error "syakutori: Pattern match failed."
+      | otherwise = error "nsum: Pattern match failed."

@@ -38,7 +38,7 @@ fromList n xs = Node (val left <> val right) left right
 
 update :: Monoid m => Size -> SegTree m -> Index -> (m -> m) -> SegTree m
 update 1 (Leaf v) 1 f = Leaf (f v)
-update _ (Leaf _) _ _ = undefined
+update _ (Leaf _) _ _ = error "update: Pattern match failed."
 update n (Node _ l r) i x
   | i <= m = Node (val left <> val r) left r
   | otherwise = Node (val l <> val right) l right
@@ -49,7 +49,7 @@ update n (Node _ l r) i x
 
 query :: Monoid m => Size -> SegTree m -> Index -> Index -> m
 query 1 (Leaf v) 1 1 = v
-query _ (Leaf _) _ _ = undefined
+query _ (Leaf _) _ _ = error "query: Pattern match failed."
 query n (Node v l r) i j
   | (i, j) == (1, n) = v
   | j <= m = query m l i j
