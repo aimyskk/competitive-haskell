@@ -2,6 +2,9 @@
 
 module Tree.SegmentTree (
   SegTree,
+  Index,
+  Size,
+  
   val,
   fromList,
   update,

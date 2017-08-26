@@ -4,7 +4,7 @@ module List.Inversion (
 
 import Tree.SegmentTree
 
-inversion :: Int -> [Int] -> Int
+inversion :: Size -> [Int] -> Int
 inversion n = fst . foldl go (0, seg0) . zip [0 .. pred n]
   where
     seg0 = fromList n (replicate n mempty)
