@@ -6,7 +6,7 @@ module WeightedGraph (
   Graph,
 
   buildG,
-  from,
+  target,
   size,
   readUndirectedEdge,
   readDirectedEdge
@@ -28,8 +28,8 @@ type Graph = A.Array Vertex (S.Set (Vertex, Weight))
 buildG :: Bound -> [Edge] -> Graph
 buildG b = A.accumArray (flip S.insert) S.empty b . map (\((s, t), w) -> (s, (t, w)))
 
-from :: Graph -> Vertex -> S.Set (Vertex, Weight)
-from = (A.!)
+target :: Graph -> Vertex -> S.Set (Vertex, Weight)
+target = (A.!)
 
 size :: Graph -> Int
 size g = let (i,j) = A.bounds g in j - i + 1

@@ -13,7 +13,7 @@ module Heap.SplayHeap (
   deleteFindMin
 ) where
 
-import Heap
+import Class
 
 data SplayHeap a = E | T (SplayHeap a) a (SplayHeap a)
 

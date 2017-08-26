@@ -23,7 +23,7 @@ _dijkstra g q m
     ((w0, s), q1) = deleteFindMin q
     m1 = S.foldr (\(t, w) acc -> M.insertWith min t (w0 + w) acc) m vns
     q2 = S.foldr (\(t, w) acc -> insert (w0 + w, t) acc) q1 vns
-    vns = S.filter (\(t, w) -> M.notMember t m || w0 + w <= m M.! t) (from g s)
+    vns = S.filter (\(t, w) -> M.notMember t m || w0 + w <= m M.! t) (target g s)
 
 type PriorityQueue = S.Set (Weight, Vertex)
 

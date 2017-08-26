@@ -21,7 +21,7 @@ _bellmanFord g n m
   | otherwise = _bellmanFord g (pred n) (M.foldrWithKey (move g) m m)
 
 move :: Graph -> Vertex -> Weight -> Memo -> Memo
-move g s aw m = S.foldr update m (from g s)
+move g s aw m = S.foldr update m (target g s)
   where
     update (t, w) acc
       | M.notMember t acc || acc M.! t < aw + w = M.insert t (aw + w) acc

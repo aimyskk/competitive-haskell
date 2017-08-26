@@ -5,7 +5,7 @@ module Graph (
   Graph,
 
   buildG,
-  from,
+  target,
   size,
   readUndirectedEdge,
   readDirectedEdge,
@@ -31,8 +31,8 @@ type Graph = A.Array Vertex Vertexes
 buildG :: Bound -> [Edge] -> Graph
 buildG = A.accumArray (flip S.insert) S.empty
 
-from :: Graph -> Vertex -> Vertexes
-from = (A.!)
+target :: Graph -> Vertex -> Vertexes
+target = (A.!)
 
 size :: Graph -> Int
 size g = let (i, j) = A.bounds g in j - i + 1
