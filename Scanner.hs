@@ -1,11 +1,4 @@
-module Scanner (
-  readInt,
-  readInteger,
-  readInts,
-  readIntegers,
-  readIntPair,
-  readIntegerPair
-) where
+module Scanner where
 
 import qualified Data.ByteString.Char8 as B
 
@@ -15,8 +8,8 @@ readInt = maybe undefined fst . B.readInt
 readInts :: B.ByteString -> [Int]
 readInts = map readInt . B.words
 
-readIntPair :: B.ByteString -> [(Int, Int)]
-readIntPair = map (pair . map readInt . B.words) . B.lines
+readIntTuples :: B.ByteString -> [(Int, Int)]
+readIntTuples = map ((\[x,y] -> (x,y)) . map readInt . B.words) . B.lines
 
 readInteger :: B.ByteString -> Integer
 readInteger = maybe undefined fst . B.readInteger
@@ -24,9 +17,5 @@ readInteger = maybe undefined fst . B.readInteger
 readIntegers :: B.ByteString -> [Integer]
 readIntegers = map readInteger . B.words
 
-readIntegerPair :: B.ByteString -> [(Integer, Integer)]
-readIntegerPair = map (pair . map readInteger . B.words) . B.lines
-
-pair :: [t] -> (t, t)
-pair [x, y] = (x, y)
-pair _ = undefined
+readIntegerTuples :: B.ByteString -> [(Integer, Integer)]
+readIntegerTuples = map ((\[x,y] -> (x,y)) . map readInteger . B.words) . B.lines
