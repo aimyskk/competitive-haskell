@@ -1,6 +1,4 @@
-module List.LIS (
-  lis
-) where
+module List.LIS where
 
 import qualified Data.Set as S
 

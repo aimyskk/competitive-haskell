@@ -1,15 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Tree.SegmentTree (
-  SegTree,
-  Index,
-  Size,
-  
-  val,
-  fromList,
-  update,
-  query
-) where
+module Tree.SegmentTree where
 
 import Data.Monoid
 

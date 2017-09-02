@@ -1,22 +1,10 @@
-module Graph (
-  Vertex,
-  Vertexes,
-  Edge,
-  Graph,
-
-  buildG,
-  target,
-  size,
-  readUndirectedEdge,
-  readDirectedEdge,
-  readBitmap
-) where
+module Graph where
 
 import qualified Data.ByteString.Char8 as B
 import qualified Data.IntSet as S
 import qualified Data.Array.IArray as A
 
-import Scanner (readInt)
+import Scanner
 
 --type Height = Int
 type Width = Int

@@ -1,7 +1,4 @@
-module Math.Prime (
-  primes,
-  factorization
-) where
+module Math.Prime where
 
 import Data.List
 

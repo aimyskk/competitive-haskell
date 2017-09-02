@@ -1,22 +1,10 @@
-module WeightedGraph (
-  Vertex,
-  Weight,
-  Edge,
-  Path,
-  Graph,
-
-  buildG,
-  target,
-  size,
-  readUndirectedEdge,
-  readDirectedEdge
-) where
+module WeightedGraph where
 
 import qualified Data.Set as S
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Array.IArray as A
 
-import Scanner (readInt)
+import Scanner
 
 type Bound = (Vertex, Vertex)
 type Vertex = Int

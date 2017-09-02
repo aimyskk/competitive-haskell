@@ -1,11 +1,4 @@
-module Math.Mod (
-  modulus,
-  (+%),
-  (*%),
-  powMod,
-  combMod,
-  factTable
-) where
+module Math.Mod where
 
 import qualified Data.Array.IArray as A
 

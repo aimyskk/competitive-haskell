@@ -1,6 +1,4 @@
-module List.Inversion (
-  inversion
-) where
+module List.Inversion where
 
 import Tree.SegmentTree
 

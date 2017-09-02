@@ -1,10 +1,4 @@
-module Tree.UnionFind (
-  UnionFind,
-
-  initial,
-  merge,
-  same
-) where
+module Tree.UnionFind where
 
 import qualified Data.IntMap.Strict as M
 
