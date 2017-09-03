@@ -40,11 +40,11 @@ constructTwoWay [s, t] = [(s, t), (t, s)]
 constructTwoWay _ = undefined
 
 readBitmap :: Width -> B.ByteString -> [Edge]
-readBitmap w bs = foldr (scout w bs) [] [0 .. B.length bs]
+readBitmap w bs = foldr (scout w bs) [] [1 .. B.length bs]
 
 scout :: Width -> B.ByteString -> Index -> [Edge] -> [Edge]
 scout w bs i acc = zip (repeat i) neighbor ++ acc
   where
     neighbor = filter (\x -> inner x && movable x) [i - 1, i + 1, i - w, i + w]
-    inner x = x >= 0 && x < B.length bs
-    movable x = B.index bs x `elem` ".sg"
+    inner x = 1 <= x && x <= B.length bs
+    movable x = B.index bs (x - 1) `elem` ".sg"
